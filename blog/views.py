@@ -20,7 +20,7 @@ def blog_index(request: "Request") -> "Response":
     return render(request, "blog_index.html", context)
 
 
-def blog_category(request: Request, category: str) -> Response:
+def blog_category(request: "Request", category: str) -> "Response":
     posts = Post.objects.filter(
         categories__name__contains=category
     ).order_by(
@@ -33,7 +33,7 @@ def blog_category(request: Request, category: str) -> Response:
     return render(request, "blog_category.html", context)
 
 
-def blog_detail(request, pk):
+def blog_detail(request: "Request", pk: int) -> "Response":
     post = Post.objects.get(pk=pk)
 
     form = CommentForm()
