@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import os
 
 from pathlib import Path
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     "projects",
     "blog",
     "users",
+    "social_django",
 ]
 
 MIDDLEWARE = [
@@ -65,6 +67,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "social_django.context_processors.backends",
+                "social_django.context_processors.login_redirect",
             ],
         },
     },
@@ -86,6 +90,17 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
+
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "social_core.backends.github.GithubOAuth2",
+]
+
+
+SOCIAL_AUTH_GITHUB_KEY = "3d1e92571e7de621ce57"
+SOCIAL_AUTH_GITHUB_SECRET = "8d530fd3c2d2717085bd4294f44ae2df30269990"
+
 
 AUTH_PASSWORD_VALIDATORS = [
     # {
@@ -130,3 +145,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "dashboard"
 
 LOGOUT_REDIRECT_URL = "dashboard"
+
+EMAIL_HOST = "localhost"
+
+EMAIL_PORT = 1025
